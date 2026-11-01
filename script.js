@@ -81,6 +81,29 @@ restartAnimation();
 const apps = [
   {
     id: 6810577410,
+    screenshots: [
+      "images/blind-opera/screenshot-01.jpg",
+      "images/blind-opera/screenshot-02.jpg",
+      "images/blind-opera/screenshot-03.jpg",
+      "images/blind-opera/screenshot-04.jpg",
+      "images/blind-opera/screenshot-05.jpg",
+      "images/blind-opera/screenshot-06.jpg",
+      "images/blind-opera/screenshot-07.jpg",
+      "images/blind-opera/screenshot-08.jpg",
+      "images/blind-opera/screenshot-09.jpg",
+      "images/blind-opera/screenshot-10.jpg",
+      "images/blind-opera/screenshot-11.jpg",
+      "images/blind-opera/screenshot-12.jpg",
+      "images/blind-opera/screenshot-13.jpg",
+      "images/blind-opera/screenshot-14.jpg",
+      "images/blind-opera/screenshot-15.jpg",
+      "images/blind-opera/screenshot-16.jpg",
+      "images/blind-opera/screenshot-17.jpg",
+      "images/blind-opera/screenshot-18.jpg",
+      "images/blind-opera/screenshot-19.jpg",
+      "images/blind-opera/screenshot-20.jpg",
+      "images/blind-opera/screenshot-21.jpg"
+    ],
     name: "Blind Opera",
     category: "Games",
     summary: "Your music becomes the world.",
@@ -90,6 +113,15 @@ const apps = [
   },
   {
     id: 6772285434,
+    screenshots: [
+      "images/yob-toy-camera/screenshot-01.jpg",
+      "images/yob-toy-camera/screenshot-02.jpg",
+      "images/yob-toy-camera/screenshot-03.jpg",
+      "images/yob-toy-camera/screenshot-04.jpg",
+      "images/yob-toy-camera/screenshot-05.jpg",
+      "images/yob-toy-camera/screenshot-06.jpg",
+      "images/yob-toy-camera/screenshot-07.jpg"
+    ],
     name: "YOB Toy Camera",
     category: "Photo & Video",
     summary: "Turn ordinary moments into miniature worlds.",
@@ -99,6 +131,18 @@ const apps = [
   },
   {
     id: 6762022393,
+    screenshots: [
+      "images/unfortunate-cookie/screenshot-01.jpg",
+      "images/unfortunate-cookie/screenshot-02.jpg",
+      "images/unfortunate-cookie/screenshot-03.jpg",
+      "images/unfortunate-cookie/screenshot-04.jpg",
+      "images/unfortunate-cookie/screenshot-05.jpg",
+      "images/unfortunate-cookie/screenshot-06.jpg",
+      "images/unfortunate-cookie/screenshot-07.jpg",
+      "images/unfortunate-cookie/screenshot-08.jpg",
+      "images/unfortunate-cookie/screenshot-09.jpg",
+      "images/unfortunate-cookie/screenshot-10.jpg"
+    ],
     name: "Unfortunate Cookie: Misfortune",
     category: "Entertainment",
     summary: "Fortune cookies with a darker sense of humor.",
@@ -108,6 +152,22 @@ const apps = [
   },
   {
     id: 6761299619,
+    screenshots: [
+      "images/yob-maker-assistant/screenshot-01.jpg",
+      "images/yob-maker-assistant/screenshot-02.jpg",
+      "images/yob-maker-assistant/screenshot-03.jpg",
+      "images/yob-maker-assistant/screenshot-04.jpg",
+      "images/yob-maker-assistant/screenshot-05.jpg",
+      "images/yob-maker-assistant/screenshot-06.jpg",
+      "images/yob-maker-assistant/screenshot-07.jpg",
+      "images/yob-maker-assistant/screenshot-08.jpg",
+      "images/yob-maker-assistant/screenshot-09.jpg",
+      "images/yob-maker-assistant/screenshot-10.jpg",
+      "images/yob-maker-assistant/screenshot-11.jpg",
+      "images/yob-maker-assistant/screenshot-12.jpg",
+      "images/yob-maker-assistant/screenshot-13.jpg",
+      "images/yob-maker-assistant/screenshot-14.jpg"
+    ],
     name: "YOB Maker Assistant",
     category: "Productivity",
     summary: "Practical tools for creative makers.",
@@ -117,6 +177,12 @@ const apps = [
   },
   {
     id: 6761371407,
+    screenshots: [
+      "images/yob-craft-calculator/screenshot-01.jpg",
+      "images/yob-craft-calculator/screenshot-02.jpg",
+      "images/yob-craft-calculator/screenshot-03.jpg",
+      "images/yob-craft-calculator/screenshot-04.jpg"
+    ],
     name: "YOB Craft Price Calculator",
     category: "Productivity",
     summary: "Price handmade products with confidence.",
@@ -247,7 +313,7 @@ appDialog.addEventListener("click", event => {
   }
 });
 
-/* Retrieve public app artwork and screenshots from Apple */
+/* Local screenshots are listed above; retrieve only artwork and descriptions from Apple. */
 
 async function loadAppStoreData() {
   const ids = apps.map(app => app.id).join(",");
@@ -272,11 +338,6 @@ async function loadAppStoreData() {
         result.artworkUrl512 ||
         result.artworkUrl100 ||
         fallbackIcon(app);
-
-      app.screenshots = [
-        ...(result.screenshotUrls || []),
-        ...(result.ipadScreenshotUrls || [])
-      ];
 
       app.longDescription = result.description || app.description;
     }
