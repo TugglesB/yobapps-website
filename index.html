@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080a16">
+  <meta name="description" content="YobApps is an independent app and game development studio creating immersive digital experiences.">
+  <title>YobApps | Independent App & Game Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="logo" href="#home">YOB<span>APPS</span></a>
+
+    <nav aria-label="Main navigation">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">INDEPENDENT APP & GAME DEVELOPMENT</p>
+
+        <h1>Small studio.<br><span>Big imagination.</span></h1>
+
+        <p class="hero-description">
+          Exploring the space between technology, creativity,
+          and experiences that stay with you.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">Explore Projects</a>
+          <a class="button secondary" href="#about">Meet the Developer</a>
+        </div>
+      </div>
+
+        <div class="hero-orb" aria-hidden="true">
+          <div class="planet-rings rings-back"></div>
+          <div class="orb-core"></div>
+          <div class="planet-rings rings-front"></div>
+        </div>
+
+      <div class="scroll-hint">SCROLL TO EXPLORE <span>↓</span></div>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="section-heading">
+        <p class="eyebrow">WHAT WE'RE CREATING</p>
+        <h2>Featured Projects</h2>
+        <p>Interactive worlds, experimental ideas, and apps built with care.</p>
+      </div>
+
+      <article class="featured-project">
+        <div class="project-art" aria-label="Abstract neon artwork inspired by Blind Opera">
+          <div class="project-glow"></div>
+          <div class="project-tunnel tunnel-one"></div>
+          <div class="project-tunnel tunnel-two"></div>
+          <div class="project-tunnel tunnel-three"></div>
+          <div class="project-tunnel tunnel-four"></div>
+          <div class="project-art-title">BLIND<br>OPERA</div>
+        </div>
+
+        <div class="project-info">
+          <p class="eyebrow">FEATURED RELEASE</p>
+          <h3>Blind Opera</h3>
+          <p>
+            A music-driven journey through glowing geometry, cosmic scenery,
+            and surreal environments. Built to make every ride feel like
+            stepping into another universe.
+          </p>
+
+          <div class="project-tags">
+            <span>Unity</span>
+            <span>3D</span>
+            <span>macOS</span>
+            <span>iOS</span>
+          </div>
+
+          <p class="project-note">
+            Store links and gameplay footage coming soon.
+          </p>
+        </div>
+      </article>
+
+     <div class="app-gallery-heading">
+  <div>
+    <p class="eyebrow">EXPLORE THE COLLECTION</p>
+    <h3>More from YobApps</h3>
+    <p>Five published experiences. One independent developer.</p>
+  </div>
+
+  <a
+    class="button secondary"
+    href="https://apps.apple.com/us/developer/lee-boats/id1888753315"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    View All on App Store ↗
+  </a>
+</div>
+
+<div class="app-grid" id="app-grid"></div>
+
+<dialog class="app-dialog" id="app-dialog" aria-labelledby="app-dialog-title">
+  <div class="dialog-header">
+    <div class="dialog-identity">
+      <img id="app-dialog-icon" alt="" width="76" height="76">
+
+      <div>
+        <p class="eyebrow" id="app-dialog-category"></p>
+        <h3 id="app-dialog-title"></h3>
+      </div>
+    </div>
+
+    <button class="dialog-close" id="dialog-close" type="button" aria-label="Close app details">
+      ✕
+    </button>
+  </div>
+
+  <p class="dialog-description" id="app-dialog-description"></p>
+
+  <div class="screenshot-gallery" id="screenshot-gallery"></div>
+
+  <div class="dialog-footer">
+    <span id="screenshot-status"></span>
+
+    <a
+      id="app-dialog-link"
+      class="button primary"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View on App Store ↗
+    </a>
+  </div>
+</dialog>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="section-heading">
+        <p class="eyebrow">BEHIND THE SCREEN</p>
+        <h2>Built from curiosity.</h2>
+      </div>
+
+      <div class="about-content">
+        <p>
+          YobApps is an independent development studio focused on making
+          apps and games that feel a little different.
+        </p>
+
+        <p>
+          I'm a self-taught developer working with Unity, Blender, and Flutter.
+          I enjoy taking an idea, figuring out how to make it work, and
+          refining the details until it feels right.
+        </p>
+
+        <p>
+          From immersive 3D experiences to useful mobile apps,
+          YobApps is where those ideas become something real.
+        </p>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <p class="eyebrow">GET IN TOUCH</p>
+      <h2>Have an idea? Let's talk.</h2>
+      <p>Questions, collaborations, or just want to say hello?</p>
+
+      <a class="button primary" href="mailto:mrltb3@gmail.com">
+        Send an Email
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> YobApps</span>
+    <span>Independently imagined. Carefully built.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
