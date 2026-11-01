@@ -81,6 +81,7 @@ restartAnimation();
 const apps = [
   {
     id: 6810577410,
+    privacyUrl: "blind_opera_privacy.html",
     screenshots: [
       "images/blind-opera/screenshot-01.jpg",
       "images/blind-opera/screenshot-02.jpg",
@@ -113,6 +114,7 @@ const apps = [
   },
   {
     id: 6772285434,
+    privacyUrl: "yob_toy_camera_privacy.html",
     screenshots: [
       "images/yob-toy-camera/screenshot-01.jpg",
       "images/yob-toy-camera/screenshot-02.jpg",
@@ -131,6 +133,7 @@ const apps = [
   },
   {
     id: 6762022393,
+    privacyUrl: "unfortunate_cookie_privacy.html",
     screenshots: [
       "images/unfortunate-cookie/screenshot-01.jpg",
       "images/unfortunate-cookie/screenshot-02.jpg",
@@ -152,6 +155,7 @@ const apps = [
   },
   {
     id: 6761299619,
+    privacyUrl: "yob_maker_assistant_privacy.html",
     screenshots: [
       "images/yob-maker-assistant/screenshot-01.jpg",
       "images/yob-maker-assistant/screenshot-02.jpg",
@@ -177,6 +181,7 @@ const apps = [
   },
   {
     id: 6761371407,
+    privacyUrl: "yob_craft_calculator_privacy.html",
     screenshots: [
       "images/yob-craft-calculator/screenshot-01.jpg",
       "images/yob-craft-calculator/screenshot-02.jpg",
@@ -394,6 +399,7 @@ function openApp(app) {
     app.longDescription || app.description;
 
   document.getElementById("app-dialog-link").href = storeUrl(app);
+  document.getElementById("app-dialog-privacy").href = app.privacyUrl;
 
   screenshotResizeObserver.disconnect();
   stopScreenshotAnimation();

@@ -1,0 +1,104 @@
+{
+  "recovered_on": "2026-11-01",
+  "policies": [
+    {
+      "app": "Blind Opera",
+      "app_store_id": 6810577410,
+      "retrieved_from": "https://exquisite-madeleine-f95c43.netlify.app/blind_opera_privacy.html",
+      "app_store_privacy_url": "https://yobapps.com/blind_opera_privacy.html",
+      "local_path": "blind_opera_privacy.html",
+      "new_url": "https://yobapps.com/blind_opera_privacy.html",
+      "source_sha256": "4ee0def4820b7e8e78a93c7c969a7dfdcc3afe10e4e8d51fca9f65f333f78327",
+      "destination_sha256": "4ee0def4820b7e8e78a93c7c969a7dfdcc3afe10e4e8d51fca9f65f333f78327",
+      "preservation": "Byte-for-byte copy of the retrieved HTML",
+      "support_email": "yeoldbagbagmaker@gmail.com",
+      "app_store_update_needed_for_new_url": false
+    },
+    {
+      "app": "YOB Toy Camera",
+      "app_store_id": 6772285434,
+      "retrieved_from": "https://exquisite-madeleine-f95c43.netlify.app/yob_toy_camera_privacy.html",
+      "app_store_privacy_url": "https://yobapps.com/yob_toy_camera_privacy.html",
+      "local_path": "yob_toy_camera_privacy.html",
+      "new_url": "https://yobapps.com/yob_toy_camera_privacy.html",
+      "source_sha256": "09d6b01d71b3bc91ec951940ea1b1607c2454b50ed346911d7306483c652cd07",
+      "destination_sha256": "09d6b01d71b3bc91ec951940ea1b1607c2454b50ed346911d7306483c652cd07",
+      "preservation": "Byte-for-byte copy of the retrieved HTML",
+      "support_email": "mrltb3@gmail.com",
+      "app_store_update_needed_for_new_url": false
+    },
+    {
+      "app": "Unfortunate Cookie: Misfortune",
+      "app_store_id": 6762022393,
+      "retrieved_from": "https://docs.google.com/document/d/11Rm6PQ9QPGpGqpB0yqLhOqMPuLBXCY7KDxy0yLJsWGs/export?format=html",
+      "app_store_privacy_url": "https://docs.google.com/document/d/11Rm6PQ9QPGpGqpB0yqLhOqMPuLBXCY7KDxy0yLJsWGs/edit?usp=sharing",
+      "local_path": "unfortunate_cookie_privacy.html",
+      "new_url": "https://yobapps.com/unfortunate_cookie_privacy.html",
+      "source_sha256": "979631e5cac7aaa6fa8d336c6ce01da6d0b2a7cd6e866ba2419a99a2ab5a6ae4",
+      "destination_sha256": "979631e5cac7aaa6fa8d336c6ce01da6d0b2a7cd6e866ba2419a99a2ab5a6ae4",
+      "preservation": "Byte-for-byte copy of the retrieved HTML",
+      "support_email": "yeoldebagbagmaker@gmail.com",
+      "app_store_update_needed_for_new_url": true
+    },
+    {
+      "app": "YOB Maker Assistant",
+      "app_store_id": 6761299619,
+      "retrieved_from": "https://www.facebook.com/share/p/17munDV2AV/",
+      "app_store_privacy_url": "https://www.facebook.com/share/p/17munDV2AV/",
+      "local_path": "yob_maker_assistant_privacy.html",
+      "new_url": "https://yobapps.com/yob_maker_assistant_privacy.html",
+      "source_sha256": "1563ab58a8e75ca3f4c834d08156e302d15dac156a3f77f0cc8a67624a7027c9",
+      "destination_sha256": "f734a7f152f4a24f622adfba43b2092203de267c44cd1b90e5dc57a8d892ba48",
+      "preservation": "Original public post text, unchanged, in a minimal HTML wrapper",
+      "support_email": "yeoldebagbagmaker@gmail.com",
+      "app_store_update_needed_for_new_url": true
+    },
+    {
+      "app": "YOB Craft Price Calculator",
+      "app_store_id": 6761371407,
+      "retrieved_from": "https://docs.google.com/document/d/1O6L_yC7bg_HDUA3rAbBs31FgPUEIb0nRpcnEyC-1sCQ/export?format=html",
+      "app_store_privacy_url": "https://docs.google.com/document/d/1O6L_yC7bg_HDUA3rAbBs31FgPUEIb0nRpcnEyC-1sCQ/edit?usp=sharing",
+      "local_path": "yob_craft_calculator_privacy.html",
+      "new_url": "https://yobapps.com/yob_craft_calculator_privacy.html",
+      "source_sha256": "8a653f0ad07ca53a5e5522cf383f69d3f9462f84dfcee29bd7e1e3bc886fd27e",
+      "destination_sha256": "8a653f0ad07ca53a5e5522cf383f69d3f9462f84dfcee29bd7e1e3bc886fd27e",
+      "preservation": "Byte-for-byte copy of the retrieved HTML",
+      "support_email": "yeoldebagbagmaker@gmail.com",
+      "app_store_update_needed_for_new_url": true
+    },
+    {
+      "app": "YOB Project Dock",
+      "app_store_id": null,
+      "retrieved_from": "https://exquisite-madeleine-f95c43.netlify.app/privacy.html",
+      "app_store_privacy_url": null,
+      "local_path": "privacy.html",
+      "new_url": "https://yobapps.com/privacy.html",
+      "source_sha256": "41e9a02708c95d3add693650d6e7038d704baf5daaed9c15f119fb921480ab81",
+      "destination_sha256": "41e9a02708c95d3add693650d6e7038d704baf5daaed9c15f119fb921480ab81",
+      "preservation": "Byte-for-byte copy of the retrieved HTML",
+      "support_email": "yeoldbagbagmaker@gmail.com",
+      "app_store_update_needed_for_new_url": false
+    }
+  ],
+  "aliases": [
+    {
+      "original_url": "https://exquisite-madeleine-f95c43.netlify.app/privacy/",
+      "new_url": "https://yobapps.com/privacy/",
+      "local_path": "privacy/index.html",
+      "same_policy_as": "privacy.html"
+    }
+  ],
+  "app_ads": {
+    "original_url": "https://exquisite-madeleine-f95c43.netlify.app/app-ads.txt",
+    "new_url": "https://yobapps.com/app-ads.txt",
+    "local_path": "app-ads.txt",
+    "sha256": "ef5b094267cae94669fb859adca98c4859a02b603ea5b70f4384275de3bf07da",
+    "preservation": "Byte-for-byte copy; no newline or publisher changes"
+  },
+  "support_recovery": {
+    "existing_app_store_developer_website": "https://yobapps.com",
+    "standalone_page_found": false,
+    "new_directory": "https://yobapps.com/support.html",
+    "notes": "Original policies contain support contacts. No standalone support/contact page was linked by the public listings or old homepage. Checked support.html, support/, contact.html and contact/ returned 404. No robots.txt or sitemap.xml was available. Public listings did not expose a separate App Support URL. Directory uses only contacts copied from the recovered policies."
+  }
+}
