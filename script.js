@@ -200,7 +200,7 @@ const screenshotPrevious = document.getElementById("screenshot-previous");
 const screenshotNext = document.getElementById("screenshot-next");
 const screenshotCounter = document.getElementById("screenshot-counter");
 let screenshotIndex = 0;
-let screenshotTarget = null;
+let screenshotAnimationId = null;
 
 function screenshotOffsets() {
   const images = [...screenshotGallery.querySelectorAll("img")];
@@ -209,25 +209,59 @@ function screenshotOffsets() {
 
 function updateScreenshotControls() {
   const offsets = screenshotOffsets();
+  screenshotCounter.textContent = `${offsets.length ? screenshotIndex + 1 : 0} / ${offsets.length}`;
+  screenshotPrevious.disabled = !offsets.length || screenshotIndex === 0;
+  screenshotNext.disabled = !offsets.length || screenshotIndex === offsets.length - 1;
+}
+
+function syncScreenshotSelection() {
+  if (screenshotAnimationId !== null) return;
+  const offsets = screenshotOffsets();
   screenshotIndex = offsets.reduce((nearest, offset, index) =>
     Math.abs(offset - screenshotGallery.scrollLeft) <
     Math.abs(offsets[nearest] - screenshotGallery.scrollLeft) ? index : nearest, 0);
-  screenshotCounter.textContent = `${offsets.length ? screenshotIndex + 1 : 0} / ${offsets.length}`;
-  const index = screenshotTarget ?? screenshotIndex;
-  screenshotPrevious.disabled = !offsets.length || index === 0;
-  screenshotNext.disabled = !offsets.length || index === offsets.length - 1;
+  updateScreenshotControls();
+}
+
+function stopScreenshotAnimation() {
+  if (screenshotAnimationId !== null) cancelAnimationFrame(screenshotAnimationId);
+  screenshotAnimationId = null;
+  screenshotGallery.style.removeProperty("scroll-snap-type");
 }
 
 function navigateScreenshot(direction) {
   const offsets = screenshotOffsets();
   if (!offsets.length) return;
-  screenshotTarget = Math.max(0, Math.min(offsets.length - 1,
-    (screenshotTarget ?? screenshotIndex) + direction));
-  screenshotGallery.scrollTo({
-    left: offsets[screenshotTarget],
-    behavior: reducedMotion.matches ? "instant" : "smooth"
-  });
+  screenshotIndex = Math.max(0, Math.min(offsets.length - 1, screenshotIndex + direction));
   updateScreenshotControls();
+
+  if (reducedMotion.matches) {
+    stopScreenshotAnimation();
+    screenshotGallery.scrollTo({left: offsets[screenshotIndex], behavior: "instant"});
+    return;
+  }
+  // Retarget the running loop without restarting it or queuing native animations.
+  if (screenshotAnimationId !== null) return;
+  screenshotGallery.style.scrollSnapType = "none";
+  let previousTime = null;
+  function animate(time) {
+    const elapsed = previousTime === null ? 16 : Math.min(time - previousTime, 64);
+    previousTime = time;
+    const target = screenshotOffsets()[screenshotIndex] || 0;
+    const distance = target - screenshotGallery.scrollLeft;
+    if (Math.abs(distance) <= 1) {
+      screenshotGallery.scrollTo({left: target, behavior: "instant"});
+      stopScreenshotAnimation();
+      return;
+    }
+    // A short time constant gives visible progress on every frame, even during bursts.
+    screenshotGallery.scrollTo({
+      left: screenshotGallery.scrollLeft + distance * (1 - Math.exp(-elapsed / 35)),
+      behavior: "instant"
+    });
+    screenshotAnimationId = requestAnimationFrame(animate);
+  }
+  screenshotAnimationId = requestAnimationFrame(animate);
 }
 
 function layoutScreenshots() {
@@ -241,24 +275,25 @@ function layoutScreenshots() {
     last.getBoundingClientRect().width - parseFloat(style.columnGap)) : 0;
   screenshotGallery.style.setProperty("--screenshot-tail", `${tail}px`);
   const offsets = screenshotOffsets();
-  screenshotGallery.scrollTo({left: offsets[screenshotTarget ?? screenshotIndex] || 0, behavior: "instant"});
+  stopScreenshotAnimation();
+  screenshotGallery.scrollTo({left: offsets[screenshotIndex] || 0, behavior: "instant"});
   updateScreenshotControls();
 }
 
 screenshotPrevious.addEventListener("click", () => navigateScreenshot(-1));
 screenshotNext.addEventListener("click", () => navigateScreenshot(1));
-screenshotGallery.addEventListener("scroll", updateScreenshotControls, { passive: true });
-screenshotGallery.addEventListener("scrollend", () => {
-  // An interrupted smooth scroll can finish after a newer navigation starts.
-  const targetOffset = screenshotOffsets()[screenshotTarget];
-  if (screenshotTarget === null || Math.abs(screenshotGallery.scrollLeft - targetOffset) <= 1) {
-    screenshotTarget = null;
-  }
-  updateScreenshotControls();
-});
+screenshotGallery.addEventListener("scroll", syncScreenshotSelection, { passive: true });
+screenshotGallery.addEventListener("scrollend", syncScreenshotSelection);
 for (const event of ["wheel", "touchstart", "pointerdown"]) {
-  screenshotGallery.addEventListener(event, () => { screenshotTarget = null; }, { passive: true });
+  screenshotGallery.addEventListener(event, () => {
+    stopScreenshotAnimation();
+    syncScreenshotSelection();
+  }, { passive: true });
 }
+appDialog.addEventListener("close", stopScreenshotAnimation);
+reducedMotion.addEventListener("change", () => {
+  if (reducedMotion.matches) layoutScreenshots();
+});
 const screenshotResizeObserver = new ResizeObserver(layoutScreenshots);
 screenshotResizeObserver.observe(screenshotGallery);
 
@@ -361,7 +396,7 @@ function openApp(app) {
   document.getElementById("app-dialog-link").href = storeUrl(app);
 
   screenshotResizeObserver.disconnect();
-  screenshotTarget = null;
+  stopScreenshotAnimation();
   screenshotIndex = 0;
   gallery.replaceChildren();
   gallery.style.setProperty("--screenshot-tail", "0px");
