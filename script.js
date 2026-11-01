@@ -195,6 +195,81 @@ const apps = [
 const appGrid = document.getElementById("app-grid");
 const appDialog = document.getElementById("app-dialog");
 const dialogClose = document.getElementById("dialog-close");
+const screenshotGallery = document.getElementById("screenshot-gallery");
+const screenshotPrevious = document.getElementById("screenshot-previous");
+const screenshotNext = document.getElementById("screenshot-next");
+const screenshotCounter = document.getElementById("screenshot-counter");
+let screenshotIndex = 0;
+let screenshotTarget = null;
+
+function screenshotOffsets() {
+  const images = [...screenshotGallery.querySelectorAll("img")];
+  return images.map(image => image.offsetLeft - images[0].offsetLeft);
+}
+
+function updateScreenshotControls() {
+  const offsets = screenshotOffsets();
+  screenshotIndex = offsets.reduce((nearest, offset, index) =>
+    Math.abs(offset - screenshotGallery.scrollLeft) <
+    Math.abs(offsets[nearest] - screenshotGallery.scrollLeft) ? index : nearest, 0);
+  screenshotCounter.textContent = `${offsets.length ? screenshotIndex + 1 : 0} / ${offsets.length}`;
+  const index = screenshotTarget ?? screenshotIndex;
+  screenshotPrevious.disabled = !offsets.length || index === 0;
+  screenshotNext.disabled = !offsets.length || index === offsets.length - 1;
+}
+
+function navigateScreenshot(direction) {
+  const offsets = screenshotOffsets();
+  if (!offsets.length) return;
+  screenshotTarget = Math.max(0, Math.min(offsets.length - 1,
+    (screenshotTarget ?? screenshotIndex) + direction));
+  screenshotGallery.scrollTo({
+    left: offsets[screenshotTarget],
+    behavior: reducedMotion.matches ? "instant" : "smooth"
+  });
+  updateScreenshotControls();
+}
+
+function layoutScreenshots() {
+  if (!appDialog.open) return;
+  const images = screenshotGallery.querySelectorAll("img");
+  const last = images[images.length - 1];
+  const style = getComputedStyle(screenshotGallery);
+  // Leave room for even a narrow final screenshot to reach the leading snap point.
+  const tail = last ? Math.max(0, screenshotGallery.clientWidth -
+    parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) -
+    last.getBoundingClientRect().width - parseFloat(style.columnGap)) : 0;
+  screenshotGallery.style.setProperty("--screenshot-tail", `${tail}px`);
+  const offsets = screenshotOffsets();
+  screenshotGallery.scrollTo({left: offsets[screenshotTarget ?? screenshotIndex] || 0, behavior: "instant"});
+  updateScreenshotControls();
+}
+
+screenshotPrevious.addEventListener("click", () => navigateScreenshot(-1));
+screenshotNext.addEventListener("click", () => navigateScreenshot(1));
+screenshotGallery.addEventListener("scroll", updateScreenshotControls, { passive: true });
+screenshotGallery.addEventListener("scrollend", () => {
+  // An interrupted smooth scroll can finish after a newer navigation starts.
+  const targetOffset = screenshotOffsets()[screenshotTarget];
+  if (screenshotTarget === null || Math.abs(screenshotGallery.scrollLeft - targetOffset) <= 1) {
+    screenshotTarget = null;
+  }
+  updateScreenshotControls();
+});
+for (const event of ["wheel", "touchstart", "pointerdown"]) {
+  screenshotGallery.addEventListener(event, () => { screenshotTarget = null; }, { passive: true });
+}
+const screenshotResizeObserver = new ResizeObserver(layoutScreenshots);
+screenshotResizeObserver.observe(screenshotGallery);
+
+appDialog.addEventListener("keydown", event => {
+  if (!appDialog.open || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+      event.target.closest("input, textarea, select, [contenteditable]")) return;
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    event.preventDefault();
+    navigateScreenshot(event.key === "ArrowLeft" ? -1 : 1);
+  }
+});
 
 function storeUrl(app) {
   return `https://apps.apple.com/us/app/${app.slug}/id${app.id}`;
@@ -285,7 +360,11 @@ function openApp(app) {
 
   document.getElementById("app-dialog-link").href = storeUrl(app);
 
+  screenshotResizeObserver.disconnect();
+  screenshotTarget = null;
+  screenshotIndex = 0;
   gallery.replaceChildren();
+  gallery.style.setProperty("--screenshot-tail", "0px");
 
   const screenshots = app.screenshots || [];
 
@@ -295,6 +374,7 @@ function openApp(app) {
     img.alt = `${app.name} screenshot ${index + 1}`;
     img.loading = "lazy";
     gallery.appendChild(img);
+    screenshotResizeObserver.observe(img);
   });
 
   document.getElementById("screenshot-status").textContent =
@@ -303,6 +383,9 @@ function openApp(app) {
       : "Screenshots unavailable. View the App Store listing for previews.";
 
   appDialog.showModal();
+  gallery.scrollTo({left: 0, behavior: "instant"});
+  screenshotResizeObserver.observe(gallery);
+  layoutScreenshots();
 }
 
 dialogClose.addEventListener("click", () => appDialog.close());

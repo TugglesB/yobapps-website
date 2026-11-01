@@ -125,7 +125,12 @@
 
   <p class="dialog-description" id="app-dialog-description"></p>
 
-  <div class="screenshot-gallery" id="screenshot-gallery"></div>
+  <div class="screenshot-viewer">
+    <div class="screenshot-gallery" id="screenshot-gallery" tabindex="0" role="region" aria-label="App screenshots"></div>
+    <button class="screenshot-arrow screenshot-previous" id="screenshot-previous" type="button" aria-label="Previous screenshot" aria-controls="screenshot-gallery" disabled>‹</button>
+    <button class="screenshot-arrow screenshot-next" id="screenshot-next" type="button" aria-label="Next screenshot" aria-controls="screenshot-gallery" disabled>›</button>
+  </div>
+  <div class="screenshot-counter" id="screenshot-counter" role="status" aria-live="polite" aria-atomic="true">0 / 0</div>
 
   <div class="dialog-footer">
     <span id="screenshot-status"></span>
